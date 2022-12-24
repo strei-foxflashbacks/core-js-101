@@ -19,9 +19,7 @@
  *   5, 10 => 50
  *   5, 5  => 25
  */
-function getRectangleArea(/* width, height */) {
-  throw new Error('Not implemented');
-}
+const getRectangleArea = (width, height) => width * height;
 
 
 /**
@@ -35,9 +33,7 @@ function getRectangleArea(/* width, height */) {
  *   3.14 => 19.729201864543903
  *   0    => 0
  */
-function getCircleCircumference(/* radius */) {
-  throw new Error('Not implemented');
-}
+const getCircleCircumference = (radius) => 2 * (radius * Math.PI);
 
 /**
  * Returns an average of two given numbers.
@@ -51,9 +47,17 @@ function getCircleCircumference(/* radius */) {
  *  10, 0  => 5
  *  -3, 3  => 0
  */
-function getAverage(/* value1, value2 */) {
-  throw new Error('Not implemented');
-}
+const getAverage = (value1, value2) => {
+  if (value1 + value2 !== Infinity) {
+    return (value1 + value2) / 2;
+  }
+  const halfedSum = (value1 / 2) + (value2 / 2);
+  const oddOrEven = (((value1 % 2) + (value2 % 2)) / 2);
+
+  return halfedSum + oddOrEven;
+};
+
+// console.log(getAverage(Number.MAX_VALUE - 2, Number.MAX_VALUE));
 
 /**
  * Returns a distance between two points by cartesian coordinates.
@@ -125,10 +129,7 @@ function getAngleBetweenVectors(/* x1, y1, x2, y2 */) {
  *     5     => 5
  *     0     => 0
  */
-function getLastDigit(/* value */) {
-  throw new Error('Not implemented');
-}
-
+const getLastDigit = (value) => Number(value.toString().split('').slice(-1));
 
 /**
  * Returns a number by given string representation.
@@ -141,9 +142,7 @@ function getLastDigit(/* value */) {
  *     '37'     => 37
  * '-525.5'     => -525.5
  */
-function parseNumberFromString(/* value */) {
-  throw new Error('Not implemented');
-}
+const parseNumberFromString = (value) => Number(value);
 
 /**
  * Returns a diagonal length of the rectangular parallelepiped given by its sides a,b,c.
@@ -201,9 +200,20 @@ function roundToPowerOfTen(/* num, pow */) {
  *   16 => false
  *   17 => true
  */
-function isPrime(/* n */) {
-  throw new Error('Not implemented');
-}
+const isPrime = (num) => {
+  if (num === 2 || num === 3) {
+    return true;
+  }
+  if (num <= 1 || num % 2 === 0 || num % 3 === 0) {
+    return false;
+  }
+  for (let i = 5; i * i <= num; i += 6) {
+    if (num % i === 0 || num % (i + 2) === 0) {
+      return false;
+    }
+  }
+  return true;
+};
 
 /**
  * Tries to convert value to number and returns it if conversion was successful;
@@ -220,8 +230,10 @@ function isPrime(/* n */) {
  *   toNumber(42, 0) => 42
  *   toNumber(new Number(42), 0) => 42
  */
-function toNumber(/* value, def */) {
-  throw new Error('Not implemented');
+function toNumber(value, def) {
+  const numbered = Number(value);
+
+  return Number.isNaN(numbered) ? def : numbered;
 }
 
 module.exports = {
